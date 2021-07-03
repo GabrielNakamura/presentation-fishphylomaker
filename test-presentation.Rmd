@@ -2,11 +2,12 @@
 title: "FishPhyloMaker"
 subtitle: "An R package to generate phylogeny for bony fishes"
 author: "Gabriel Nakamura"
-institute: "UFRGS (Postdoc) and UFC (Temporary professor)"
+institute: "UFRGS - Postdoc | UFC - Temporary professor"
 date: "2021/06/30 (updated: `r Sys.Date()`)"
 output:
   xaringan::moon_reader:
     lib_dir: libs
+    seal: false
     nature:
       titleSlideClass: "center"
       highlightStyle: github
@@ -14,26 +15,235 @@ output:
       countIncrementalSlides: false
 ---
 
-# A history of effort and pain
+class: inverse, center, middle
 
+# FishPhyloMaker
+
+## An R package to generate phylogeny for bony fishes
+
+<img src="Figs/Logo_FishPhyloMaker.png" width="150px"/>
+
+.large[Gabriel Nakamura | BLEFF | `r Sys.Date()` ]
 
 
 ---
 
-# No {more} pain
+# Phylogenies in Ecology
 
-A long time ago...
+.pull-left[
 
-<img src="/Users/gabrielnakamura/OneDrive/Aulas/presentation-FishPhyloMaker/Figs/Neot-Ichth-2021.png" />
+Cam Webb
+![](Figs/camWebb.jpeg)
+
+]
+
+.pull-right[
+
+- Understand character evolution
+
+- Community assembling mechanisms
+
+- Historical factors associated with community assembly
+
+![](Figs/Webb-phylogenies-2002.png)
+
+]
+
+---
+
+# Let´s use evolutionary history in ecological studies
+
+
+.pull-left[
+
+## Once upon a time...
+
+- there was a master thesis to be done
+
+- this thesis needed a phylogeny
+
+- more precisely, a fish phylogeny
+
+- so, let's pick a phylogeny
+
+]
 
 --
 
-![](https://media.giphy.com/media/hyyV7pnbE0FqLNBAzs/giphy.gif)
+.pull-right[
+
+![](https://media.giphy.com/media/BpGWitbFZflfSUYuZ9/giphy.gif)
+It will be ease
+
+]
+
+---
+
+# And then, let's pick a phylogeny
+
+.pull-left[
+
+### The first comprehensive fish phylogeny was [Betancur-R, 2017](https://bmcecolevol.biomedcentral.com/articles/10.1186/s12862-017-0958-3)
+
+.center[
+
+```{r eval=TRUE, echo=FALSE, out.width="70%"}
+knitr::include_graphics("Figs/Betancur-R-phylo.png")
+```
+
+]
+
+]
+
+--
+
+.pull-right[
+
+### Then, let's do what ecologists like to do
+
+.midle[
+
+.center[
+
+```{r eval=TRUE, echo=FALSE, out.width="100%", out.height="100%"}
+knitr::include_graphics("Figs/newick-phylo-old.png")
+```
+
+]
+
+]
+
+]
+
+---
+
+# We have a phylogeny **but**...
+
+.pull-left[
+
+- Species in the specie spool are absent from the most comprehensive phylogeny
+
+- Science run fast 
+![](https://media.giphy.com/media/vCJrwYGBQlbdS/giphy.gif)
+--
+
+- We work with a lot of data
+
+]
+
+--
+
+.pull-right[
+
+- No problem, we insert them e.g.
+
+```{r eval=TRUE, echo=FALSE, out.height="100%"}
+knitr::include_graphics("Figs/Phylomatic-module.jpeg")
+```
+
+--
+
+- No problem, we can run faster
+
+![](https://media.giphy.com/media/jpcXRWtGKI9usq33vt/giphy.gif)
+]
+
+---
+
+# But, wait, we are talking about fishes 🐟
+
+.pull-left[
+
+### Problems
+
+- absence of a comprehensive phylogeny *specially in the tropical region**
+
+- absence of an "fish Phylomatic" 
+
+]
+
+--
+
+.pull-right[
+
+### Solutions
+
+- Construct a comprehensive phylogeny using molecular tools
+
+- Make it ""by-hand""
+
+]
+
+---
+
+```{r xaringan-logo, echo=FALSE}
+xaringanExtra::use_logo(image_url = "/Figs/Logo_FishPhyloMaker.png")
+```
+
+# Finding for solutions
+.pull-left[
+- Ok, I don´t have money
+.center[
+
+```{r echo=FALSE, eval=TRUE, out.width="50%"}
+knitr::include_graphics(path = "Figs/money-michaelscott.gif")
+```
+
+]
+
+- I only live once, and the life is too short to edit newick files
+.center[
+
+```{r echo=FALSE, eval=TRUE, out.width="350%"}
+knitr::include_graphics(path = "https://media.giphy.com/media/xT5LME4JUdxhiGQl4Q/giphy.gif")
+```
+
+]
+
+]
+
+--
+
+.pull-right[
+
+### Did you ever try to edit by-hand newick files? Take a shot..
+
+```{r xaringan-editable, echo=FALSE}
+xaringanExtra::use_editable()
+
+```
+
+.can-edit[
+
+((Cichlasoma_paranaense:43.65148501,Crenicichla_britskii:43.65148494):133.8257517,((((Ancistrus_pirareta:66.43187279,Ancistrus_reisi:66.43187272):27.3886498,((Curculionichthys_insperatus:42.59221138,Hypostomus_iheringii:42.59221131):8.661809897,Loricaria_luciae:51.25402127):42.56650131):22.23951779,(Bryconamericus_exodon:59.41152614,Astyanax_lacustris:59.41152616):56.64851415):8.34683831,Gymnotus_inaequilabiatus:124.4068786):53.07035805);
+
+]
+
+]
+
+---
+
+## Things become complicated with thousands of species
+
+- For example:
+
+---
+
+# We need a reproducible science
+
+- How phylogeny was edited?
+
+- How species was added?
+
+- How can I obtain the same phylogeny that **you** made?
 
 ---
 class: inverse, center, middle
 
 # Get Started
+```{r echo=FALSE, eval=TRUE}
+knitr::include_graphics(path = "Figs/Logo_FishPhyloMaker.png", dpi = 700)
+```
 
 ---
 
@@ -63,19 +273,111 @@ library(FishPhyloMaker)
 
 # Inside the *Fish[PhyloMaker]*
 
+## FishPhyloMaker package has 3 main functions
+  `FishTaxaMaker()`: Check species names accordingly to [FishBase]()
+  `FishPhyloMaker()`: Generate phylogenetic tree
+  `DarwinianShortfall()`: Calculates the amount of PD due to Darwinian Shortfalls
+    
+--
 
+## From a species list we need to check species names
+
+Let´s use a dataset present in the package
+
+```{r echo=TRUE, eval=TRUE}
+library(FishPhyloMaker)
+data(neotropical_comm)
+data_comm <- neotropical_comm[, -c(1, 2)] # removing latitude and longitude
+```
+
+There are two ways to obtain a formatted list of species 
+.can-edit[
+```{r echo=TRUE, eval=TRUE}
+taxon_data <- FishTaxaMaker(data_comm, allow.manual.insert = TRUE)
+```
+
+]
 
 ---
 
-# Hello Ninja
+# Inside the *Fish[PhyloMaker]*
 
-As a presentation ninja, you certainly should not be satisfied by the "Hello World" example. You need to understand more about two things:
+## Output from `FishTaxaMaker`
 
-1. The [remark.js](https://remarkjs.com) library;
+```{r echo=FALSE, eval=TRUE}
+library(DT)
+```
 
-1. The **xaringan** package;
 
-Basically **xaringan** injected the chakra of R Markdown (minus Pandoc) into **remark.js**. The slides are rendered by remark.js in the web browser, and the Markdown source needed by remark.js is generated from R Markdown (**knitr**).
+```{r echo=TRUE, eval=FALSE}
+
+datatable(taxon_data[[2]])
+
+```
+
+We can directly use this object from `FishTaxaMaker` to generate a phylogenetic tree
+
+---
+
+# Inside The *Fish[PhyloMaker]*
+
+## Generating a phylogeny for a local pool of species
+
+Finally we can generate a phylogenetic tree with `FishPhyloMaker` function
+
+```{r echo=TRUE, eval=TRUE}
+phylo_fish_streams <- FishPhyloMaker(data = taxon_data$Taxon_data_FishPhyloMaker, 
+                                     return.insertions = TRUE,
+                                     insert.base.node = TRUE, 
+                                     progress.bar = TRUE)
+```
+
+
+```{r xaringan-panelset, echo=FALSE}
+xaringanExtra::use_panelset()
+```
+
+.panel[.panel-name[R Code]
+```{r echo=TRUE, eval=TRUE}
+library(ggtree)
+tree.PR<- phylo_fish_streams$Phylogeny
+taxon_dataPR <- taxon_data$Taxon_data_FishPhyloMaker
+tree.PR <- ape::makeNodeLabel(tree.PR)
+phylo <- tree.PR
+
+rm.famNames <- which(table(taxon_dataPR$f) == 1) # monotipic families
+names.fam <- setdiff(unique(taxon_dataPR$f), names(rm.famNames)) # removing monotipic families from the names 
+
+for (i in 1:length(names.fam)) {
+  set <- subset(taxon_dataPR, f == names.fam[i])
+  phylo <- ape::makeNodeLabel(phylo, "u", nodeList = list(Fam_name = set$s))
+  
+  phylo$node.label[which(phylo$node.label == 
+                           "Fam_name") ] <- paste(set$f[1])
+}
+
+pos.node <- unlist(lapply(names.fam, function(x){
+  which(phylo$node.label == x) + length(phylo$tip.label)
+}))
+
+df.phylo <- data.frame(Fam.names = names.fam,
+                       node.number = pos.node)
+
+plot.base <- ggtree(phylo) + theme_tree2()
+plot1 <- revts(plot.base) + scale_x_continuous(labels=abs)
+
+
+PR.PG <- plot1 + geom_hilight(data = df.phylo, aes(node = node.number, fill = Fam.names), 
+                      alpha = .6) +
+  scale_fill_viridis(discrete = T, name = "Family names")
+```
+]
+
+.panel[.panel-name[Plot phylogeny]
+```{r echo=FALSE, eval=TRUE}
+PR.PG
+```
+]
 
 ---
 

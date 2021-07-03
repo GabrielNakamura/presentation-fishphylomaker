@@ -7,6 +7,11 @@
     <script src="libs/header-attrs-2.9/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"x82a6080a49a41d8b7c4b54392325fc1","expires":14}</script>
+    <script src="libs/himalaya-1.1.0/himalaya.js"></script>
+    <script src="libs/js-cookie-3.0.0/js.cookie.js"></script>
+    <link href="libs/editable-0.2.6/editable.css" rel="stylesheet" />
+    <script src="libs/editable-0.2.6/editable.js"></script>
     <script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
     <script src="libs/jquery-3.5.1/jquery.min.js"></script>
     <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
@@ -26,37 +31,252 @@
   </head>
   <body>
     <textarea id="source">
-class: center, title-slide
+
+
+class: inverse, center, middle
 
 # FishPhyloMaker
+
 ## An R package to generate phylogeny for bony fishes
-### Gabriel Nakamura
-### UFRGS (Postdoc) and UFC (Temporary professor)
-### 2021/06/30 (updated: 2021-06-30)
 
----
+&lt;img src="Figs/Logo_FishPhyloMaker.png" width="150px"/&gt;
 
-
-# A history of effort and pain
-
+.large[Gabriel Nakamura | BLEFF | 2021-07-03 ]
 
 
 ---
 
-# No {more} pain
+# Phylogenies in Ecology
 
-A long time ago...
+.pull-left[
 
-&lt;img src="/Users/gabrielnakamura/OneDrive/Aulas/presentation-FishPhyloMaker/Figs/Neot-Ichth-2021.png" /&gt;
+Cam Webb
+![](Figs/camWebb.jpeg)
+
+]
+
+.pull-right[
+
+- Understand character evolution
+
+- Community assembling mechanisms
+
+- Historical factors associated with community assembly
+
+![](Figs/Webb-phylogenies-2002.png)
+
+]
+
+---
+
+# Let´s use evolutionary history in ecological studies
+
+
+.pull-left[
+
+## Once upon a time...
+
+- there was a master thesis to be done
+
+- this thesis needed a phylogeny
+
+- more precisely, a fish phylogeny
+
+- so, let's pick a phylogeny
+
+]
 
 --
 
-![](https://media.giphy.com/media/hyyV7pnbE0FqLNBAzs/giphy.gif)
+.pull-right[
+
+![](https://media.giphy.com/media/BpGWitbFZflfSUYuZ9/giphy.gif)
+It will be ease
+
+]
+
+---
+
+# And then, let's pick a phylogeny
+
+.pull-left[
+
+### The first comprehensive fish phylogeny was [Betancur-R, 2017](https://bmcecolevol.biomedcentral.com/articles/10.1186/s12862-017-0958-3)
+
+.center[
+
+&lt;img src="Figs/Betancur-R-phylo.png" width="70%" /&gt;
+
+]
+
+]
+
+--
+
+.pull-right[
+
+### Then, let's do what ecologists like to do
+
+.midle[
+
+.center[
+
+&lt;img src="Figs/newick-phylo-old.png" width="100%" height="100%" /&gt;
+
+]
+
+]
+
+]
+
+---
+
+# We have a phylogeny **but**...
+
+.pull-left[
+
+- Species in the specie spool are absent from the most comprehensive phylogeny
+
+- Science run fast 
+![](https://media.giphy.com/media/vCJrwYGBQlbdS/giphy.gif)
+--
+
+- We work with a lot of data
+
+]
+
+--
+
+.pull-right[
+
+- No problem, we insert them e.g.
+
+&lt;img src="Figs/Phylomatic-module.jpeg" width="2211" height="100%" /&gt;
+
+--
+
+- No problem, we can run faster
+
+![](https://media.giphy.com/media/jpcXRWtGKI9usq33vt/giphy.gif)
+]
+
+---
+
+# But, wait, we are talking about fishes 🐟
+
+.pull-left[
+
+### Problems
+
+- absence of a comprehensive phylogeny *specially in the tropical region**
+
+- absence of an "fish Phylomatic" 
+
+]
+
+--
+
+.pull-right[
+
+### Solutions
+
+- Construct a comprehensive phylogeny using molecular tools
+
+- Make it ""by-hand""
+
+]
+
+---
+
+<div>
+<style type="text/css">.xaringan-extra-logo {
+width: 110px;
+height: 128px;
+z-index: 0;
+background-image: url(/Figs/Logo_FishPhyloMaker.png);
+background-size: contain;
+background-repeat: no-repeat;
+position: absolute;
+top:1em;right:1em;
+}
+</style>
+<script>(function () {
+  let tries = 0
+  function addLogo () {
+    if (typeof slideshow === 'undefined') {
+      tries += 1
+      if (tries < 10) {
+        setTimeout(addLogo, 100)
+      }
+    } else {
+      document.querySelectorAll('.remark-slide-content:not(.title-slide):not(.inverse):not(.hide_logo)')
+        .forEach(function (slide) {
+          const logo = document.createElement('div')
+          logo.classList = 'xaringan-extra-logo'
+          logo.href = null
+          slide.appendChild(logo)
+        })
+    }
+  }
+  document.addEventListener('DOMContentLoaded', addLogo)
+})()</script>
+</div>
+
+# Finding for solutions
+.pull-left[
+- Ok, I don´t have money
+.center[
+
+&lt;img src="Figs/money-michaelscott.gif" width="50%" /&gt;
+
+]
+
+- I only live once, and the life is too short to edit newick files
+.center[
+
+&lt;img src="https://media.giphy.com/media/xT5LME4JUdxhiGQl4Q/giphy.gif" width="350%" /&gt;
+
+]
+
+]
+
+--
+
+.pull-right[
+
+### Did you ever try to edit by-hand newick files? Take a shot..
+
+
+
+.can-edit[
+
+((Cichlasoma_paranaense:43.65148501,Crenicichla_britskii:43.65148494):133.8257517,((((Ancistrus_pirareta:66.43187279,Ancistrus_reisi:66.43187272):27.3886498,((Curculionichthys_insperatus:42.59221138,Hypostomus_iheringii:42.59221131):8.661809897,Loricaria_luciae:51.25402127):42.56650131):22.23951779,(Bryconamericus_exodon:59.41152614,Astyanax_lacustris:59.41152616):56.64851415):8.34683831,Gymnotus_inaequilabiatus:124.4068786):53.07035805);
+
+]
+
+]
+
+---
+
+## Things become complicated with thousands of species
+
+- For example:
+
+---
+
+# We need a reproducible science
+
+- How phylogeny was edited?
+
+- How species was added?
+
+- How can I obtain the same phylogeny that **you** made?
 
 ---
 class: inverse, center, middle
 
 # Get Started
+&lt;img src="Figs/Logo_FishPhyloMaker.png" width="473" /&gt;
 
 ---
 
@@ -88,10 +308,293 @@ library(FishPhyloMaker)
 
 # Inside the *Fish[PhyloMaker]*
 
+## FishPhyloMaker package has 3 main functions
+    - `FishTaxaMaker()`: Check species names accordingly to [FishBase]()
+    - `FishPhyloMaker()`: Generate phylogenetic tree
+    - `DarwinianShortfall()`: Calculates the amount of PD due to Darwinian Shortfalls
+    
+--
 
+## From a species list we need to check species names
+
+Let´s use a dataset present in the package
+
+
+```r
+library(FishPhyloMaker)
+data(neotropical_comm)
+data_comm &lt;- neotropical_comm[, -c(1, 2)] # removing latitude and longitude
+```
+
+There are two ways to obtain a formatted list of species 
+.can-edit[
+
+```r
+taxon_data &lt;- FishTaxaMaker(data_comm, allow.manual.insert = TRUE)
+```
+
+```
+## tell the Family of  Astyanax sp1
+## 
+## tell the Order of  Astyanax sp1
+## 
+## tell the Family of  Astyanax sp2
+## 
+## tell the Order of  Astyanax sp2
+## 
+## tell the Family of  Astyanax sp3
+## 
+## tell the Order of  Astyanax sp3
+## 
+## tell the Family of  Ancistrus sp
+## 
+## tell the Order of  Ancistrus sp
+## 
+## tell the Family of  Piabarchus stramineus
+## 
+## tell the Order of  Piabarchus stramineus
+## 
+## tell the Family of  Crenicichla sp
+## 
+## tell the Order of  Crenicichla sp
+## 
+## tell the Family of  Characidium sp
+## 
+## tell the Order of  Characidium sp
+## 
+## tell the Family of  Gymnotus sp
+## 
+## tell the Order of  Gymnotus sp
+## 
+## tell the Family of  Hisonotus sp
+## 
+## tell the Order of  Hisonotus sp
+## 
+## tell the Family of  Hypostomus sp
+## 
+## tell the Order of  Hypostomus sp
+## 
+## tell the Family of  Hypostomus sp2
+## 
+## tell the Order of  Hypostomus sp2
+## 
+## tell the Family of  Hypostomus aff latirostris
+## 
+## tell the Order of  Hypostomus aff latirostris
+## 
+## tell the Family of  Imparfinis sp
+## 
+## tell the Order of  Imparfinis sp
+## 
+## tell the Family of  Jupiaba acantogaster
+## 
+## tell the Order of  Jupiaba acantogaster
+## 
+## tell the Family of  Loricaria cf coximensis
+## 
+## tell the Order of  Loricaria cf coximensis
+## 
+## tell the Family of  Moenkhausia oligolepsis
+## 
+## tell the Order of  Moenkhausia oligolepsis
+```
+
+]
 
 ---
 
+# Inside the *Fish[PhyloMaker]*
+
+## Output from `FishTaxaMaker`
+
+
+```r
+taxon_data
+```
+
+```
+## $All_info_fishbase
+##                           user_spp                  valid_names       Subfamily
+## 2737            Astyanax_lacustris           Astyanax lacustris  Incertae sedis
+## 2742             Astyanax_lineatus            Astyanax lineatus  Incertae sedis
+## NA                    Astyanax_sp1                         &lt;NA&gt;            &lt;NA&gt;
+## NA.1                  Astyanax_sp2                         &lt;NA&gt;            &lt;NA&gt;
+## NA.2                  Astyanax_sp3                         &lt;NA&gt;            &lt;NA&gt;
+## 2699       Astyanax_eigenmanniorum      Astyanax eigenmanniorum  Incertae sedis
+## 2705            Astyanax_fasciatus           Astyanax fasciatus  Incertae sedis
+## 1608         Apareiodon_ibitiensis        Apareiodon ibitiensis            &lt;NA&gt;
+## NA.3                  Ancistrus_sp                         &lt;NA&gt;            &lt;NA&gt;
+## 2769              Astyanax_paranae             Astyanax paranae  Incertae sedis
+## 1612        Apareiodon_piracicabae       Apareiodon piracicabae            &lt;NA&gt;
+## 4658         Bryconamericus_exodon        Bryconamericus exodon    Stevardiinae
+## NA.4         Piabarchus_stramineus                         &lt;NA&gt;            &lt;NA&gt;
+## 7949              Corydoras_aeneus             Corydoras aeneus   Corydoradinae
+## 8449          Crenicichla_britskii         Crenicichla britskii       Cichlinae
+## 8482          Crenicichla_lepidota         Crenicichla lepidota       Cichlinae
+## NA.5                Crenicichla_sp                         &lt;NA&gt;            &lt;NA&gt;
+## 4896       Callichthys_callichthys      Callichthys callichthys  Callichthyinae
+## NA.6                Characidium_sp                         &lt;NA&gt;            &lt;NA&gt;
+## 6121            Characidium_gomesi           Characidium gomesi   Characidiinae
+## 6132          Characidium_laterale         Characidium laterale   Characidiinae
+## 6993         Cichlasoma_paranaense        Cichlasoma paranaense Cichlasomatinae
+## 6167             Characidium_zebra            Characidium zebra   Characidiinae
+## NA.7                   Gymnotus_sp                         &lt;NA&gt;            &lt;NA&gt;
+## 13632     Gymnotus_inaequilabiatus     Gymnotus inaequilabiatus            &lt;NA&gt;
+## 15663      Hypostomus_ancistroides      Hypostomus ancistroides    Hypostominae
+## 15710         Hypostomus_iheringii         Hypostomus iheringii    Hypostominae
+## 15717          Hypostomus_khimaera          Hypostomus khimaera    Hypostominae
+## 8792   Curculionichthys_insperatus  Curculionichthys insperatus     Otothyrinae
+## NA.8                  Hisonotus_sp                         &lt;NA&gt;            &lt;NA&gt;
+## 15122          Hoplias_malabaricus          Hoplias malabaricus            &lt;NA&gt;
+## 19889           Moenkhausia_bonita           Moenkhausia bonita  Incertae sedis
+## NA.9                 Hypostomus_sp                         &lt;NA&gt;            &lt;NA&gt;
+## NA.10               Hypostomus_sp2                         &lt;NA&gt;            &lt;NA&gt;
+## NA.11   Hypostomus_aff_latirostris                         &lt;NA&gt;            &lt;NA&gt;
+## 16093         Imparfinis_schubarti         Imparfinis schubarti            &lt;NA&gt;
+## NA.12                Imparfinis_sp                         &lt;NA&gt;            &lt;NA&gt;
+## NA.13         Jupiaba_acantogaster                         &lt;NA&gt;            &lt;NA&gt;
+## 17499          Leporinus_friderici          Leporinus friderici            &lt;NA&gt;
+## NA.14      Loricaria_cf_coximensis                         &lt;NA&gt;            &lt;NA&gt;
+## 18198             Loricaria_luciae             Loricaria luciae    Loricariinae
+## 18221 Loricariichthys_platymetopon Loricariichthys platymetopon    Loricariinae
+## 19911         Moenkhausia_forestii         Moenkhausia forestii  Incertae sedis
+## NA.15      Moenkhausia_oligolepsis                         &lt;NA&gt;            &lt;NA&gt;
+## 22038           Oligosarcus_pintoi           Oligosarcus pintoi  Incertae sedis
+## 25209             Piabina_argentea             Piabina argentea    Stevardiinae
+## 25207      Piabarchus_torrenticola      Piabarchus torrenticola    Stevardiinae
+## 8403       Creagrutus_meridionalis      Creagrutus meridionalis    Stevardiinae
+## 27860         Pyrrhulina_australis         Pyrrhulina australis   Pyrrhulininae
+## 32701     Trachelyopterus_galeatus     Trachelyopterus galeatus Auchenipterinae
+## 26761       Psellogrammus_kennedyi       Psellogrammus kennedyi  Incertae sedis
+## 24307                Parodon_nasus                Parodon nasus            &lt;NA&gt;
+## 25781          Poecilia_reticulata          Poecilia reticulata     Poeciliinae
+## 25012     Phenacorhamdia_tenebrosa     Phenacorhamdia tenebrosa            &lt;NA&gt;
+## 28529     Rineloricaria_lanceolata     Rineloricaria lanceolata    Loricariinae
+## 28604     Roeboides_descalvadensis     Roeboides descalvadensis      Characinae
+## 28206               Rhamdia_quelen               Rhamdia quelen            &lt;NA&gt;
+## 31748       Synbranchus_marmoratus       Synbranchus marmoratus            &lt;NA&gt;
+## 30184        Serrapinnus_notomelas        Serrapinnus notomelas  Cheirodontinae
+##                Family              Order          Class   SuperClass
+## 2737       Characidae      Characiformes Actinopterygii Osteichthyes
+## 2742       Characidae      Characiformes Actinopterygii Osteichthyes
+## NA               &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;         &lt;NA&gt;
+## NA.1             &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;         &lt;NA&gt;
+## NA.2             &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;         &lt;NA&gt;
+## 2699       Characidae      Characiformes Actinopterygii Osteichthyes
+## 2705       Characidae      Characiformes Actinopterygii Osteichthyes
+## 1608     Parodontidae      Characiformes Actinopterygii Osteichthyes
+## NA.3             &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;         &lt;NA&gt;
+## 2769       Characidae      Characiformes Actinopterygii Osteichthyes
+## 1612     Parodontidae      Characiformes Actinopterygii Osteichthyes
+## 4658       Characidae      Characiformes Actinopterygii Osteichthyes
+## NA.4             &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;         &lt;NA&gt;
+## 7949   Callichthyidae       Siluriformes Actinopterygii Osteichthyes
+## 8449        Cichlidae        Perciformes Actinopterygii Osteichthyes
+## 8482        Cichlidae        Perciformes Actinopterygii Osteichthyes
+## NA.5             &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;         &lt;NA&gt;
+## 4896   Callichthyidae       Siluriformes Actinopterygii Osteichthyes
+## NA.6             &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;         &lt;NA&gt;
+## 6121      Crenuchidae      Characiformes Actinopterygii Osteichthyes
+## 6132      Crenuchidae      Characiformes Actinopterygii Osteichthyes
+## 6993        Cichlidae        Perciformes Actinopterygii Osteichthyes
+## 6167      Crenuchidae      Characiformes Actinopterygii Osteichthyes
+## NA.7             &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;         &lt;NA&gt;
+## 13632      Gymnotidae      Gymnotiformes Actinopterygii Osteichthyes
+## 15663    Loricariidae       Siluriformes Actinopterygii Osteichthyes
+## 15710    Loricariidae       Siluriformes Actinopterygii Osteichthyes
+## 15717    Loricariidae       Siluriformes Actinopterygii Osteichthyes
+## 8792     Loricariidae       Siluriformes Actinopterygii Osteichthyes
+## NA.8             &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;         &lt;NA&gt;
+## 15122    Erythrinidae      Characiformes Actinopterygii Osteichthyes
+## 19889      Characidae      Characiformes Actinopterygii Osteichthyes
+## NA.9             &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;         &lt;NA&gt;
+## NA.10            &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;         &lt;NA&gt;
+## NA.11            &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;         &lt;NA&gt;
+## 16093   Heptapteridae       Siluriformes Actinopterygii Osteichthyes
+## NA.12            &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;         &lt;NA&gt;
+## NA.13            &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;         &lt;NA&gt;
+## 17499     Anostomidae      Characiformes Actinopterygii Osteichthyes
+## NA.14            &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;         &lt;NA&gt;
+## 18198    Loricariidae       Siluriformes Actinopterygii Osteichthyes
+## 18221    Loricariidae       Siluriformes Actinopterygii Osteichthyes
+## 19911      Characidae      Characiformes Actinopterygii Osteichthyes
+## NA.15            &lt;NA&gt;               &lt;NA&gt;           &lt;NA&gt;         &lt;NA&gt;
+## 22038      Characidae      Characiformes Actinopterygii Osteichthyes
+## 25209      Characidae      Characiformes Actinopterygii Osteichthyes
+## 25207      Characidae      Characiformes Actinopterygii Osteichthyes
+## 8403       Characidae      Characiformes Actinopterygii Osteichthyes
+## 27860    Lebiasinidae      Characiformes Actinopterygii Osteichthyes
+## 32701 Auchenipteridae       Siluriformes Actinopterygii Osteichthyes
+## 26761      Characidae      Characiformes Actinopterygii Osteichthyes
+## 24307    Parodontidae      Characiformes Actinopterygii Osteichthyes
+## 25781     Poeciliidae Cyprinodontiformes Actinopterygii Osteichthyes
+## 25012   Heptapteridae       Siluriformes Actinopterygii Osteichthyes
+## 28529    Loricariidae       Siluriformes Actinopterygii Osteichthyes
+## 28604      Characidae      Characiformes Actinopterygii Osteichthyes
+## 28206   Heptapteridae       Siluriformes Actinopterygii Osteichthyes
+## 31748   Synbranchidae   Synbranchiformes Actinopterygii Osteichthyes
+## 30184      Characidae      Characiformes Actinopterygii Osteichthyes
+## 
+## $Taxon_data_FishPhyloMaker
+##                                  s              f                o
+## 2737            Astyanax_lacustris     Characidae    Characiformes
+## 2742             Astyanax_lineatus     Characidae    Characiformes
+## NA                    Astyanax_sp1                                
+## 2699                  Astyanax_sp2                                
+## 2705                  Astyanax_sp3                                
+## 1608         Apareiodon_ibitiensis   Parodontidae    Characiformes
+## 2769              Astyanax_paranae     Characidae    Characiformes
+## 1612        Apareiodon_piracicabae   Parodontidae    Characiformes
+## 4658                  Ancistrus_sp                                
+## 7949              Corydoras_aeneus Callichthyidae     Siluriformes
+## 8449          Crenicichla_britskii      Cichlidae      Perciformes
+## 8482          Crenicichla_lepidota      Cichlidae      Perciformes
+## 4896         Piabarchus_stramineus                                
+## 6121            Characidium_gomesi    Crenuchidae    Characiformes
+## 6132          Characidium_laterale    Crenuchidae    Characiformes
+## 6993         Cichlasoma_paranaense      Cichlidae      Perciformes
+## 6167                Crenicichla_sp                                
+## 13632     Gymnotus_inaequilabiatus     Gymnotidae    Gymnotiformes
+## 15663               Characidium_sp                                
+## 15710         Hypostomus_iheringii   Loricariidae     Siluriformes
+## 15717          Hypostomus_khimaera   Loricariidae     Siluriformes
+## 8792   Curculionichthys_insperatus   Loricariidae     Siluriformes
+## 15122          Hoplias_malabaricus   Erythrinidae    Characiformes
+## 19889                  Gymnotus_sp                                
+## 16093         Imparfinis_schubarti  Heptapteridae     Siluriformes
+## 17499          Leporinus_friderici    Anostomidae    Characiformes
+## 18198             Loricaria_luciae   Loricariidae     Siluriformes
+## 18221 Loricariichthys_platymetopon   Loricariidae     Siluriformes
+## 19911         Moenkhausia_forestii     Characidae    Characiformes
+## 22038                 Hisonotus_sp                                
+## 25209             Piabina_argentea     Characidae    Characiformes
+## 25207      Piabarchus_torrenticola     Characidae    Characiformes
+## 8403                 Hypostomus_sp                                
+## 27860               Hypostomus_sp2                                
+## 32701   Hypostomus_aff_latirostris                                
+## 26761       Psellogrammus_kennedyi     Characidae    Characiformes
+## 24307                Imparfinis_sp                                
+## 25781         Jupiaba_acantogaster                                
+## 25012     Phenacorhamdia_tenebrosa  Heptapteridae     Siluriformes
+## 28529      Loricaria_cf_coximensis                                
+## 28604     Roeboides_descalvadensis     Characidae    Characiformes
+## 28206               Rhamdia_quelen  Heptapteridae     Siluriformes
+## 31748       Synbranchus_marmoratus  Synbranchidae Synbranchiformes
+## 30184      Moenkhausia_oligolepsis                                
+## 
+## $Species_not_in_Fishbase
+##  [1] "Astyanax sp1"               "Astyanax sp2"              
+##  [3] "Astyanax sp3"               "Ancistrus sp"              
+##  [5] "Piabarchus stramineus"      "Crenicichla sp"            
+##  [7] "Characidium sp"             "Gymnotus sp"               
+##  [9] "Hisonotus sp"               "Hypostomus sp"             
+## [11] "Hypostomus sp2"             "Hypostomus aff latirostris"
+## [13] "Imparfinis sp"              "Jupiaba acantogaster"      
+## [15] "Loricaria cf coximensis"    "Moenkhausia oligolepsis"
+```
+
+
+---
 # Hello Ninja
 
 As a presentation ninja, you certainly should not be satisfied by the "Hello World" example. You need to understand more about two things:
@@ -331,8 +834,8 @@ library(leaflet)
 leaflet() %&gt;% addTiles() %&gt;% setView(-93.65, 42.0285, zoom = 17)
 ```
 
-<div id="htmlwidget-9b89752e7622d3a5f7a5" style="width:100%;height:432px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-9b89752e7622d3a5f7a5">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]}],"setView":[[42.0285,-93.65],17,[]]},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-3dfc8b15da99384ce115" style="width:100%;height:432px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3dfc8b15da99384ce115">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]}],"setView":[[42.0285,-93.65],17,[]]},"evals":[],"jsHooks":[]}</script>
 
 ---
 
@@ -344,8 +847,8 @@ DT::datatable(
 )
 ```
 
-<div id="htmlwidget-05f790cdc23c23dda0b6" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-05f790cdc23c23dda0b6">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":8,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[8,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-755c73be7a4f7448672f" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-755c73be7a4f7448672f">{"x":{"filter":"none","fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":8,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[8,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 
 ---
 
